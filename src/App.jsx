@@ -5,6 +5,7 @@ import { Footer } from './components/Footer';
 import { CartDrawer } from './components/CartDrawer';
 import { QuickViewModal } from './components/QuickViewModal';
 import { SearchModal } from './components/SearchModal';
+import { CheckoutModal } from './components/CheckoutModal';
 import { Toast } from './components/Toast';
 
 import { Home } from './pages/Home';
@@ -44,6 +45,7 @@ export const App = () => {
       <CartDrawer />
       <QuickViewModal />
       <SearchModal />
+      <CheckoutModal />
       <Toast />
     </div>
   );

@@ -28,6 +28,7 @@ export const AppProvider = ({ children }) => {
   const [quickViewProduct, setQuickViewProduct] = useState(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState(null);
 
   // Sync Cart
@@ -117,6 +118,7 @@ export const AppProvider = ({ children }) => {
       quickViewProduct,
       isSearchOpen,
       isCartOpen,
+      isCheckoutOpen,
       toastMessage,
       totalCartCount,
       totalCartPrice,
@@ -128,6 +130,7 @@ export const AppProvider = ({ children }) => {
       setQuickViewProduct,
       setIsSearchOpen,
       setIsCartOpen,
+      setIsCheckoutOpen,
       showToast
     }}>
       {children}

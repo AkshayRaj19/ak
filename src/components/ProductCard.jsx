@@ -1,21 +1,29 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Heart, Eye, ShoppingBag, Star } from 'lucide-react';
+import { Heart, Eye, ShoppingBag, Star, Sparkles } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 
 export const ProductCard = ({ product }) => {
   const { wishlist, toggleWishlist, addToCart, setQuickViewProduct } = useApp();
   const isWishlisted = wishlist.includes(product.id);
 
+  const formattedPrice = `₹${product.price.toLocaleString('en-IN')}`;
+  const formattedOldPrice = product.oldPrice ? `₹${product.oldPrice.toLocaleString('en-IN')}` : null;
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
+      whileHover={{ y: -8, scale: 1.015 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.4, ease: 'easeOut' }}
       className="product-card"
     >
-      <span className="badge-discount">25% OFF</span>
+      {product.badge && (
+        <span className="badge-discount d-flex align-items-center gap-1">
+          <Sparkles size={12} /> {product.badge}
+        </span>
+      )}
 
       <div className="product-img-wrapper">
         <img src={product.image} alt={product.name} loading="lazy" />
@@ -40,7 +48,7 @@ export const ProductCard = ({ product }) => {
           <button
             className="action-btn"
             onClick={() => addToCart(product, 1)}
-            title="Add to Cart"
+            title="Add to Shopping Bag"
           >
             <ShoppingBag size={18} />
           </button>
@@ -55,16 +63,16 @@ export const ProductCard = ({ product }) => {
             <Star
               key={i}
               size={14}
-              fill={i < Math.floor(product.rating) ? '#ffc107' : 'none'}
-              stroke="#ffc107"
+              fill={i < Math.floor(product.rating) ? '#f59e0b' : 'none'}
+              stroke="#f59e0b"
             />
           ))}
-          <span className="ms-1 text-muted small">({product.rating})</span>
+          <span className="ms-1 text-muted small fw-semibold">({product.rating})</span>
         </div>
 
         <div className="product-price">
-          <span className="price-current">${product.price}</span>
-          {product.oldPrice && <span className="price-old">${product.oldPrice}</span>}
+          <span className="price-current">{formattedPrice}</span>
+          {formattedOldPrice && <span className="price-old">{formattedOldPrice}</span>}
         </div>
       </div>
     </motion.div>
